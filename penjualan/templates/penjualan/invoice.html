@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: sans-serif; }
+        .header { text-align: center; margin-bottom: 30px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #000; padding: 10px; }
+    </style>
+</head>
+<body>
+    <div class="header"><h1>INVOICE #{{ so.nomor_so }}</h1></div>
+    <p>Pelanggan: <strong>{{ so.pelanggan }}</strong></p>
+    <table>
+        <tr><th>Barang</th><th>Jumlah</th><th>Harga</th></tr>
+        {% for item in so.items.all %}
+        <tr>
+            <td>{{ item.barang.nama_barang }}</td>
+            <td>{{ item.jumlah }}</td>
+            <td>Rp {{ item.harga_jual }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

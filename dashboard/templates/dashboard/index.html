@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard ERP</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f9; }
+        .card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .value { font-size: 24px; font-weight: bold; color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>Dashboard Eksekutif</h1>
+    
+    <div class="grid">  
+        <div class="card">Total Pendapatan <div class="value">Rp {{ pendapatan }}</div></div>
+        <div class="card">Total Modal (HPP) <div class="value">Rp {{ modal }}</div></div>
+    {% if is_admin %}
+        <div class="card">Estimasi Laba <div class="value" style="color: green;">Rp {{ laba }}</div></div>
+    {% else %}
+        <p><i>Hubungi Admin untuk melihat laporan laba.</i></p>
+    {% endif %}
+    </div>
+
+    <div class="card">
+        <h2>Stok Gudang Real-Time</h2>
+        <table>
+            <tr><th>Barang</th><th>Stok</th></tr>
+            {% for s in stok %}
+            <tr><td>{{ s.barang.nama_barang }}</td><td>{{ s.jumlah }} {{ s.barang.satuan_utama.simbol }}</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+    <a href="/admin">Kelola Data (Admin Panel)</a>
+</body>
+</html>
